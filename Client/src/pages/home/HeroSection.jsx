@@ -30,7 +30,7 @@ export default function HeroSection() {
             <Button onClick={() => navigate("/products")} className="bg-yellow-400 text-black hover:bg-yellow-500">
               Shop Now
             </Button>
-            <Button onClick={() => navigate("/products")} variant="outline" className="border-white bg-white text-black hover:bg-white hover:text-black">
+            <Button onClick={() => navigate("/products")} className="border-white bg-white text-black hover:bg-white hover:text-black">
               Explore Deals
             </Button>
           </div>
