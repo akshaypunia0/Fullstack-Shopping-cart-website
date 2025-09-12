@@ -3,10 +3,10 @@ import Navbar from './Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
 
-const Layout = () => {
+const Layout = ({setIsCartOpen}) => {
     return (
         <div className='w-full min-h-screen flex flex-col'>
-            <Navbar />
+            <Navbar onCartclick={setIsCartOpen}/>
             <main className='flex-1 flex justify-center items-center'>
                 <Outlet />
             </main>

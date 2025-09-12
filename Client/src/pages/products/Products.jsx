@@ -3,8 +3,14 @@ import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSelector } from "react-redux"
 
-export default function Products({ category = "all", products }) {
+export default function Products({ category = "all" }) {
+
+  const products = useSelector((state) => state.products.products)
+  console.log("Products from state", products);
+  
+
   const [search, setSearch] = useState("");
 
   // Filter products by category and search
@@ -35,7 +41,7 @@ export default function Products({ category = "all", products }) {
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
             <motion.div
