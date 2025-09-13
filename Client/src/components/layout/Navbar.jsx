@@ -2,8 +2,13 @@ import { Link, NavLink } from 'react-router-dom'
 import { ShoppingCart, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { motion, AnimatePresence } from "motion/react";
+import { useSelector } from 'react-redux';
 
 const Navbar = ({onCartclick}) => {
+
+  const numberOfItemsInCart = useSelector((state) => state.cart.cartItems)
+  console.log("Number in cart", numberOfItemsInCart);
+  
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -49,7 +54,7 @@ const Navbar = ({onCartclick}) => {
           <Link to="/cart" className="relative">
             <ShoppingCart className="w-6 h-6" onClick={onCartclick}/>
             <span className="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1">
-              3
+              {numberOfItemsInCart.length}
             </span>
           </Link>
         </div>

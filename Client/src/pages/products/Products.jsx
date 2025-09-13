@@ -3,13 +3,14 @@ import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { addToCart } from "../../app/productSlice/cartSlice.js";
 
 export default function Products({ category = "all" }) {
 
+  const dispatch = useDispatch();
+
   const products = useSelector((state) => state.products.products)
-  console.log("Products from state", products);
-  
 
   const [search, setSearch] = useState("");
 
@@ -19,6 +20,11 @@ export default function Products({ category = "all" }) {
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchSearch;
   });
+
+
+  const addItemToCart = (product) => {
+    dispatch(addToCart(product));
+  }
 
   return (
     <div className="min-h-screen bg-gray-800 text-white px-4 py-8 w-full">
@@ -65,7 +71,7 @@ export default function Products({ category = "all" }) {
                 <div className="flex justify-end">
                   <Button
                     className="bg-blue-600 hover:bg-blue-700 mx-4 py-2"
-                    onClick={() => dispatch(addToCart(product))}
+                    onClick={() =>  addItemToCart(product)}
                   >
                     Add to Cart
                   </Button>

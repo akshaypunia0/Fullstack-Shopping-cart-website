@@ -9,8 +9,49 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Signup = () => {
+
+    const navigate = useNavigate()
+
+    let [data, setData] = useState({
+        username: "",
+        fullname: "",
+        email: "",
+        password: ""
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+
+        setData({
+            ...data,
+            [name]: value
+        })
+    }
+
+    const onSignup = (e) => {
+        e.preventDefault()
+
+        const userData = data;
+
+        console.log(userData);
+
+        setData({
+        username: "",
+        fullname: "",
+        email: "",
+        password: ""
+    })
+
+    navigate("/login")
+
+    }
+
+
     return (
         <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-800 border-gray-800 text-white text-xl">
             <CardHeader>
@@ -24,31 +65,40 @@ const Signup = () => {
                 <form>
                     <div className="flex flex-col gap-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="username">Enter Username</Label>
+                            <Label htmlFor="username">Username</Label>
                             <Input
                                 id="username"
                                 type="text"
+                                name="username"
                                 placeholder="username"
+                                value={data.username}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="fullname">Enter Fullname</Label>
+                                <Label htmlFor="fullname">Fullname</Label>
                             </div>
                             <Input
                                 id="fullname"
-                                type="text" 
+                                type="text"
+                                name="fullname"
                                 placeholder="fullname"
+                                value={data.fullname}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="email">Enter Email</Label>
+                            <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
                                 type="email"
+                                name="email"
                                 placeholder="mail@example.com"
+                                value={data.email}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -56,8 +106,11 @@ const Signup = () => {
                             <Label htmlFor="password">Create password</Label>
                             <Input
                                 id="password"
-                                type="password"
+                                type="text"
+                                name="password"
                                 placeholder="password"
+                                value={data.password}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -65,15 +118,18 @@ const Signup = () => {
                 </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-                <Button type="submit" className="w-full cursor-pointer">
+                <Button type="submit" className="w-full cursor-pointer" onClick={onSignup}>
                     Signup
                 </Button>
                 <div className="text-lg text-gray-300 mt-4">
                     Already have an account?{" "}
                 </div>
-                <Button variant="outline" className="w-full text-black cursor-pointer">
-                    Login
-                </Button>
+                <Link to="/login" className="w-full">
+                    <Button variant="outline" className="w-full text-black cursor-pointer">
+                        Login
+                    </Button>
+                </Link>
+
             </CardFooter>
         </Card>
     )

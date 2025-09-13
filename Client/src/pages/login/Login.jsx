@@ -10,16 +10,23 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Link } from "react-router-dom"
 
 const Login = () => {
+
+    const onLogin = () => {
+        
+    }
+
+
     return (
         <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-800 border-gray-800 text-white text-xl">
             <CardHeader>
                 <CardTitle>Login to your account</CardTitle>
                 <CardDescription>
-                    Enter your email and password below to login to your account
+                    Enter your details below to login to your account
                 </CardDescription>
-                
+
             </CardHeader>
             <CardContent>
                 <form>
@@ -49,15 +56,18 @@ const Login = () => {
                 </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-                <Button type="submit" className="w-full cursor-pointer">
+                <Button type="submit" className="w-full cursor-pointer" onClick={onLogin}>
                     Login
                 </Button>
                 <div className="text-lg text-gray-300 mt-4">
                     Don't have an account?{" "}
                 </div>
-                <Button variant="outline" className="w-full text-black cursor-pointer">
-                    Signup
-                </Button>
+                <Link to="/signup" className="w-full">
+                    <Button variant="outline" className="w-full text-black cursor-pointer">
+                        Signup
+                    </Button>
+                </Link>
+
             </CardFooter>
         </Card>
     )

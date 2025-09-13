@@ -2,16 +2,42 @@
 import { useSelector, useDispatch } from "react-redux";
 import { motion } from "motion/react";
 import { Trash2, ArrowLeft, ShoppingCart } from "lucide-react";
-// import { removeFromCart, clearCart } from "../../redux/cartSlice";
+import { removeFromCart, emptyCart, increaseItemQuantity, reduceItemQuantity } from "../../app/productSlice/cartSlice.js";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const Cart = ({cartItems}) => {
-  const dispatch = useDispatch();
-  // const { cartItems, totalPrice } = useSelector((state) => state.products.products);
+const Cart = () => {
+
+  const dispatch = useDispatch()
+
+  const allCartItems = useSelector((state) => state.cart.cartItems);
+  console.log("cart items from redux", allCartItems);
+  
+  const totalItemPrice = allCartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const deliveryCharge = 40;
+
+  const totalPrice = totalItemPrice + deliveryCharge;
+
+  const removeItemFromCart = (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+  const reduceQuantity = (id) => {
+    dispatch(reduceItemQuantity(id))
+  }
+
+  const addQuantity = (id) => {
+    dispatch(increaseItemQuantity(id))
+  }
+
+  const removeAllItems = () => {
+    console.log("removeAllItem running");
+    
+    dispatch(emptyCart())
+  }
 
   return (
-    <div className="min-h-screen bg-gray-700 border-1 border-gray-800 dark:bg-gray-900 px-4 sm:px-8 lg:px-16 py-10">
+    <div className="min-h-screen lg:w-[50%] bg-gray-700 border-1 border-gray-800 dark:bg-gray-900 px-4 sm:px-8 lg:px-16 py-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -21,10 +47,10 @@ const Cart = ({cartItems}) => {
         <h1 className="text-2xl sm:text-3xl font-bold text-white dark:text-gray-100">
           Your Cart
         </h1>
-        {cartItems.length > 0 && (
+        {allCartItems.length > 0 && (
           <Button
             variant="destructive"
-            // onClick={() => dispatch(clearCart())}
+            onClick={() => removeAllItems()}
             className="flex items-center gap-2"
           >
             <Trash2 size={18} /> Clear Cart
@@ -33,7 +59,7 @@ const Cart = ({cartItems}) => {
       </motion.div>
 
       {/* Cart Empty State */}
-      {cartItems.length === 0 ? (
+      {allCartItems.length === 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -53,7 +79,7 @@ const Cart = ({cartItems}) => {
         <div className=" flex flex-col grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items List */}
           <div className="lg:col-span-2 space-y-6">
-            {cartItems.map((item, index) => (
+            {allCartItems.map((item, index) => (
               <motion.div
                 key={item.id || index}
                 initial={{ opacity: 0, x: -30 }}
@@ -71,16 +97,21 @@ const Cart = ({cartItems}) => {
                     {item.name}
                   </h3>
                   <p className="text-sm text-gray-300 dark:text-gray-400">
-                    ${item.price}
+                    ₹{item.price}
                   </p>
                   <p className="text-sm text-gray-300 dark:text-gray-400">
                     Quantity: {item.quantity}
                   </p>
+                  <div className="mt-3 text-white">
+                    <button onClick={() => reduceQuantity(item.id)} className="bg-blue-500 hover:bg-blue-600 w-[40px] h-auto m-auto text-xl rounded-lg mr-4">-</button>
+                    <button onClick={() => addQuantity(item.id)} className="bg-blue-500 hover:bg-blue-600 w-[40px] h-auto m-auto text-xl rounded-lg " >+</button>
+                    
+                  </div>
                 </div>
                 <Button
                   variant="ghost"
-                  className="text-red-500 hover:text-red-700"
-                  // onClick={() => dispatch(removeFromCart(item.id))}
+                  className="text-white hover:text-white bg-red-600 hover:bg-red-700"
+                  onClick={() => removeItemFromCart(item.id)}
                 >
                   <Trash2 size={20} />
                 </Button>
@@ -100,22 +131,22 @@ const Cart = ({cartItems}) => {
             </h2>
             <div className="flex justify-between items-center mb-2">
               <p className="text-gray-300 dark:text-gray-300">Subtotal</p>
-              <p className="font-medium text-gray-800 dark:text-gray-100">
-                {/* ${totalPrice.toFixed(2)} */}255.00
+              <p className="font-medium text-white dark:text-gray-100">
+                ₹{totalItemPrice}
               </p>
             </div>
             <div className="flex justify-between items-center mb-4">
               <p className="text-gray-300 dark:text-gray-300">Shipping</p>
-              <p className="font-medium text-gray-800 dark:text-gray-100">
-                Free
+              <p className="font-medium text-white dark:text-gray-100">
+                ₹{deliveryCharge}
               </p>
             </div>
             <div className="flex justify-between items-center border-t pt-3">
-              <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+              <p className="text-lg font-semibold text-white dark:text-gray-100">
                 Total
               </p>
               <p className="text-lg font-bold text-blue-600">
-                {/* ${totalPrice.toFixed(2)} */} 255.00
+                ₹{totalPrice}
               </p>
             </div>
             <Button className="mt-6 bg-blue-600 hover:bg-blue-700 w-full text-white py-2 rounded-lg">
