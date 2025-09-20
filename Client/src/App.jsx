@@ -7,6 +7,7 @@ import Product from './pages/products/Products'
 import Cart from './pages/cart/Cart'
 import Home from './pages/home/Home'
 import { useSelector } from 'react-redux'
+import ProtectedRoutes from './components/utils/ProtectedRoutes'
 
 
 function App() {
@@ -17,21 +18,26 @@ function App() {
 
   return (
     <>
-      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-700">
+      <div className="w-full flex flex-col items-center justify-center min-h-screen bg-gray-800">
 
         <Routes>
-          {/* <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/' element={<Login />} />
-          <Route path='/signup' element={<Signup />} /> */}
+          <Route path='/signup' element={<Signup />} />
 
           {/* <Route element={}/> */}
 
-          <Route element={<Layout setIsCartOpen={() => setIsCartOpen(true)}/>}>
-            <Route path='/home' element={<Home />} />
-            <Route path='/' element={<Home />} />
-            <Route path='/products' element={<Product />} />
-            <Route path='/cart' element={<Cart cartItems={products}/>} />
+          <Route element={<ProtectedRoutes />}>
+
+            <Route element={<Layout setIsCartOpen={() => setIsCartOpen(true)} />}>
+              <Route path='/home' element={<Home />} />
+              <Route path='/products' element={<Product />} />
+              <Route path='/cart' element={<Cart cartItems={products} />} />
+            </Route>
+
           </Route>
+
+
         </Routes>
 
       </div>

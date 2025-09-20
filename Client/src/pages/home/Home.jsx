@@ -2,6 +2,7 @@ import React from 'react'
 import HeroSection from './HeroSection'
 import FeaturedCategories from './FeaturedCategories'
 import Products from '../products/Products'
+import NewsletterSignup from '../newsletterSignup/NewsletterSignup'
 
 const Home = ({ products }) => {
 
@@ -10,6 +11,7 @@ const Home = ({ products }) => {
       <HeroSection />
       <FeaturedCategories />
       <Products products={products} />
+      <NewsletterSignup />
     </div>
   )
 }

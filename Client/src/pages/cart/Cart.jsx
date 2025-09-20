@@ -37,7 +37,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen lg:w-[50%] bg-gray-700 border-1 border-gray-800 dark:bg-gray-900 px-4 sm:px-8 lg:px-16 py-10">
+    <div className="min-h-auto lg:w-[40%] bg-gray-700 border-1 border-gray-800 my-8 rounded-2xl shadow-2xl dark:bg-gray-900 px-4 sm:px-8 lg:px-16 py-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

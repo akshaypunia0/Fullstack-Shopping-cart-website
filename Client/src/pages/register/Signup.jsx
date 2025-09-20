@@ -41,19 +41,19 @@ const Signup = () => {
         console.log(userData);
 
         setData({
-        username: "",
-        fullname: "",
-        email: "",
-        password: ""
-    })
+            username: "",
+            fullname: "",
+            email: "",
+            password: ""
+        })
 
-    navigate("/login")
+        navigate("/login")
 
     }
 
 
     return (
-        <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-800 border-gray-800 text-white text-xl">
+        <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-900 border-gray-900 text-white text-xl">
             <CardHeader>
                 <CardTitle>Create a new account</CardTitle>
                 <CardDescription>
@@ -118,7 +118,7 @@ const Signup = () => {
                 </form>
             </CardContent>
             <CardFooter className="flex-col gap-2">
-                <Button type="submit" className="w-full cursor-pointer" onClick={onSignup}>
+                <Button type="submit" className="w-full cursor-pointer bg-gray-700 hover:bg-gray-800" onClick={onSignup}>
                     Signup
                 </Button>
                 <div className="text-lg text-gray-300 mt-4">
