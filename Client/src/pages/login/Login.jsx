@@ -20,7 +20,7 @@ const Login = () => {
 
 
     return (
-        <Card className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-900 border-gray-900 text-white text-xl">
+        <Card className="sm:w-[100%] md:w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto flex bg-gray-900 border-gray-900 text-white text-xl">
             <CardHeader>
                 <CardTitle>Login to your account</CardTitle>
                 <CardDescription>

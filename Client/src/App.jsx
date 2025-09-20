@@ -22,7 +22,6 @@ function App() {
 
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
 
           {/* <Route element={}/> */}
@@ -31,6 +30,7 @@ function App() {
 
             <Route element={<Layout setIsCartOpen={() => setIsCartOpen(true)} />}>
               <Route path='/home' element={<Home />} />
+              <Route path='/' element={<Home />} />
               <Route path='/products' element={<Product />} />
               <Route path='/cart' element={<Cart cartItems={products} />} />
             </Route>
