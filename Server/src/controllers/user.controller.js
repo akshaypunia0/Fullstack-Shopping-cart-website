@@ -101,6 +101,7 @@ const loginUser = async (req, res) => {
         
 
         res.cookie("token", token, {
+            httpOnly: true,
             secure: false
         })
 
@@ -116,9 +117,6 @@ const loginUser = async (req, res) => {
 const logout = async (req, res) => {
     
 }
-
-
-
 
 
 
