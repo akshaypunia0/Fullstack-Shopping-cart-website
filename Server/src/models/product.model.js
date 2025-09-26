@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import User from './user.model';
 
 const productSchema = new mongoose.Schema({
     name: {
@@ -17,6 +18,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    listedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User
+    }
 }, { timestamps: true });
 
 const Product = mongoose.model('Product', productSchema);

@@ -4,8 +4,7 @@ import connectDB from "./src/config/db.js";
 
 console.log(port);
 
-
 connectDB();
 
 
-app.listen(3000);
+app.listen(port);
